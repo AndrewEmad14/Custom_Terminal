@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1763016389 source:/mnt/aadeec03-1b54-4b33-971a-2abd1197eafa/ITI-Mat/C++/DAY1/CustomTermianl/main.cpp
+	<iostream>
+	"TerminalModifier.h"
+
+1763017460 /mnt/aadeec03-1b54-4b33-971a-2abd1197eafa/ITI-Mat/C++/DAY1/CustomTermianl/TerminalModifier.h
+
+1763016257 source:/mnt/aadeec03-1b54-4b33-971a-2abd1197eafa/ITI-Mat/C++/DAY1/CustomTermianl/TermianlModifier.cpp
+	"TerminalModifier.h"
+	<thread>
+	<chrono>
+	<iostream>
+	<windows.h>
+
