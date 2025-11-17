@@ -9,17 +9,17 @@ using namespace std;
 
     TerminalModifier::TerminalModifier(){
         #ifdef _WIN32
-        void enableAnsiSupport() {
+            void enableAnsiSupport();
+        #endif
+
+    }
+    void enableAnsiSupport() {
             HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
             DWORD dwMode = 0;
             GetConsoleMode(hOut, &dwMode);
             dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
             SetConsoleMode(hOut, dwMode);
-        }
-        #endif
-
     }
-
    void TerminalModifier:: terminalSleep(int numberOfSeconds){
         this_thread::sleep_for(chrono::seconds(numberOfSeconds));
     }

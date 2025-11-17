@@ -24,9 +24,9 @@
 
 
 class TerminalModifier{
-       #ifdef _WIN32
+
          void enableAnsiSupport(void);
-        #endif
+
        public:
         TerminalModifier();
         void terminalSleep(int numberOfSeconds);
