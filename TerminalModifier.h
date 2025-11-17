@@ -24,14 +24,10 @@
 
 
 class TerminalModifier{
-        #ifdef _WIN32
-        TerminalModifier(){
-                       void enableAnsiSupport(void);
-
-        }
+       #ifdef _WIN32
+         void enableAnsiSupport(void);
         #endif
-        public:
-
+       public:
         TerminalModifier();
         void terminalSleep(int numberOfSeconds);
         void gotoxy(int x, int y);

@@ -12,3 +12,16 @@
 	<iostream>
 	<windows.h>
 
+1763373340 source:/home/andrew-emad/Documents/CustomTermianl/main.cpp
+	<iostream>
+	"TerminalModifier.h"
+
+1763373451 /home/andrew-emad/Documents/CustomTermianl/TerminalModifier.h
+
+1763373340 source:/home/andrew-emad/Documents/CustomTermianl/TermianlModifier.cpp
+	"TerminalModifier.h"
+	<thread>
+	<chrono>
+	<iostream>
+	<windows.h>
+
