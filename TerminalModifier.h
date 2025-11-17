@@ -43,16 +43,14 @@ using namespace std;
 #endif
                                                 //unified key codes
 
-#define KEY_SPECIAL_START_CODE 1000
+
 #define KEY_UP_CODE      1000
 #define KEY_DOWN_CODE    1001
 #define KEY_LEFT_CODE    1002
 #define KEY_RIGHT_CODE   1003
-#define KEY_HOME_CODE    1004
-#define KEY_END_CODE     1005
-#define KEY_DELETE_CODE  1006
-#define KEY_INSERT_CODE  1007
-
+#define KEY_ENTER_CODE   1004
+#define KEY_ESC_CODE     1005
+#define KEY_BACKSPACE_CODE 1006
 
                                                     // ANSI color macros
 #define BLACK_COLOR   "\033[30m"
@@ -70,7 +68,6 @@ using namespace std;
                                                             // to the top left of the Terminal
 #define CLEAR_SCREEN  "\033[2J\033[H"
 
-#endif
 
 
 class TerminalModifier{
@@ -82,7 +79,10 @@ class TerminalModifier{
         int readWithTimeout(char* c, int timeout_ms);
 
         public:
-        static termios orig_termios;
+        #ifdef _WIN32
+        #else
+            static termios orig_termios;
+        #endif // _WIN32
         TerminalModifier();
         void terminalSleep(int numberOfSeconds);
         void clearScreen(void);
@@ -95,6 +95,7 @@ class TerminalModifier{
 
 };
 
+#endif
 
 
 

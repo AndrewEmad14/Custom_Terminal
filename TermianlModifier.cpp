@@ -108,9 +108,9 @@ int  TerminalModifier::readKey() {
         }
     }
 
-    if (ch == KEY_ESC) return KEY_ESC;
-    if (ch == KEY_ENTER) return KEY_ENTER;      // Enter
-    if (ch == KEY_BACKSPACE || ch == KEY_BACKSPACE_ALT) return KEY_BACKSPACE;
+    if (ch == KEY_ESC) return KEY_ESC_CODE;
+    if (ch == KEY_ENTER) return KEY_ENTER_CODE;      // Enter
+    if (ch == KEY_BACKSPACE || ch == KEY_BACKSPACE_ALT) return KEY_BACKSPACE_CODE;
 
 
 }
@@ -139,13 +139,13 @@ int  TerminalModifier::readKey() {
             return KEY_UNKNOWN; //  second char wasn't '['
         } else {
             // No more input within timeout → it's a standalone ESC
-            return KEY_ESC;
+            return KEY_ESC_CODE;
         }
     } else {
         switch (c) {
-            case KEY_ENTER:     return KEY_ENTER;
-            case KEY_ENTER_ALT: return KEY_ENTER;
-            case KEY_BACKSPACE: return KEY_BACKSPACE;
+            case KEY_ENTER:
+            case KEY_ENTER_ALT: return KEY_ENTER_CODE;
+            case KEY_BACKSPACE: return KEY_BACKSPACE_CODE;
             default:            return KEY_UNKNOWN;
         }
     }

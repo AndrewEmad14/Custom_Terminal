@@ -85,11 +85,11 @@ int main(void) {
                             printMenu(myTerm, buttons[0], buttons[1],buttons[2],startX,startY);
                             break;
 
-                        case KEY_ESC:
+                        case KEY_ESC_CODE:
                             exit=true;
                             break;
 
-                        case KEY_ENTER:
+                        case KEY_ENTER_CODE:
                                     cout << "\nDEBUG: Enter pressed! current=" << current << endl;
                                     if(current==2) {
                                         cout << "DEBUG: Exiting..." << endl;
@@ -103,7 +103,7 @@ int main(void) {
                                     }
                                     break;
 
-                        case KEY_BACKSPACE:
+                        case KEY_BACKSPACE_CODE:
                             if(insidePage){
                                 setBtnColor(current,buttons);
                                 printMenu(myTerm, buttons[0], buttons[1],buttons[2],startX,startY);
