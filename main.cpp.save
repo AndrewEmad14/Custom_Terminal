@@ -1,0 +1,67 @@
+#include <iostream>
+#include <termios.h>
+#include <unistd.h>
+#include <sys/select.h> // for timeout
+#include <errno.h>
+#include "TerminalModifier.h"
+
+
+using namespace std;
+
+
+
+int reader(){
+        char c;
+                if (read(STDIN_FILENO, &c, 1) <= 0) continue;
+
+                if (c == KEY_ESC) {
+                    char second = 0, third = 0;
+
+                    // Try to read next char within ~50ms (typical for escape sequences)
+                    if (myTerm.readWithTimeout(&second, 50) > 0) {
+                        if (second == KEY_LBRACKET) {
+                            if (myTerm.readWithTimeout(&third, 50) > 0) {
+                                switch (third) {
+                                        case KEY_UP_CODE:   return KEY_UP_CODE;
+
+                                        case KEY_DOWN_CODE: return KEY_DOWN_CODE;
+
+                                        case KEY_RIGHT_CODE:return KEY_RIGHT_CODE;
+
+                                        case KEY_LEFT_CODE: return KEY_LEFT_CODE;
+
+                                        default:            return KEY_UNKNOWN;
+                                }
+                            }
+                        }
+                    } else {
+                                                    // No more input within timeout → it's a standalone ESC
+                        return KEY_ESC;
+                    }
+                } else {
+                    switch (c) {
+                        case KEY_ENTER:     return KEY_ENTER;
+                        case KEY_BACKSPACE: return KEY_BACKSPACE;
+                        default:
+                           return KEY_UNKNOWN
+                    }
+                }
+
+}
+
+
+
+int main(void) {
+    TerminalModifier myTerm;
+    myTerm.enableRawMode();
+
+    cout << "Press keys (ESC to exit loop manually if needed)...\n";
+
+    while (1) {
+        
+    }
+
+
+    myTerm.disableRawMode();
+    return 0;
+}
