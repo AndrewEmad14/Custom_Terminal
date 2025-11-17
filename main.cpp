@@ -9,19 +9,17 @@ void setBtnColor(int &current,string buttons[]);
 void  printMenu(string firstBtn,string secondBtn,string thridBtn,int startX,int startY);
 
 void printMenu(TerminalModifier& myTerm,string firstBtn,string secondBtn,string thridBtn,int startX,int startY){
-                myTerm.displayText(firstBtn, "╔════════════════╗", startX, startY);
-                myTerm.displayText(firstBtn, "║      New       ║", startX, startY + 1);
-                myTerm.displayText(firstBtn, "╚════════════════╝", startX, startY + 2);
-
-                                                                                    // Second button (1 blank line gap)
-                myTerm.displayText(secondBtn, "╔════════════════╗", startX, startY + 4);
-                myTerm.displayText(secondBtn, "║    Display     ║", startX, startY + 5);
-                myTerm.displayText(secondBtn, "╚════════════════╝", startX, startY + 6);
-
-                                                                            // Third button (1 blank line gap)
-                myTerm.displayText(thridBtn, "╔════════════════╗", startX, startY + 8);
-                myTerm.displayText(thridBtn, "║      Exit      ║", startX, startY + 9);
-                myTerm.displayText(thridBtn, "╚════════════════╝", startX, startY + 10);
+               myTerm.displayText(firstBtn, "+----------------+", startX, startY);
+                myTerm.displayText(firstBtn, "|      New       |", startX, startY + 1);
+                myTerm.displayText(firstBtn, "+----------------+", startX, startY + 2);
+                                                                                                // Second button (1 blank line gap)
+                myTerm.displayText(secondBtn, "+----------------+", startX, startY + 4);
+                myTerm.displayText(secondBtn, "|    Display     |", startX, startY + 5);
+                myTerm.displayText(secondBtn, "+----------------+", startX, startY + 6);
+                                                                                        // Third button (1 blank line gap)
+                myTerm.displayText(thridBtn, "+----------------+", startX, startY + 8);
+                myTerm.displayText(thridBtn, "|      Exit      |", startX, startY + 9);
+                myTerm.displayText(thridBtn, "+----------------+", startX, startY + 10);
 
 
 

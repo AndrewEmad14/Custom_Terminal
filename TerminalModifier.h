@@ -23,7 +23,7 @@ using namespace std;
 #ifdef _WIN32
     #define EXTENDED_WIN        0xE0
     #define KEY_UP_WIN          72
-    #define KEY_DOW_WIN        80
+    #define KEY_DOWN_WIN        80
     #define KEY_LEFT_WIN        75
     #define KEY_RIGHT_WIN       77
     #define KEY_ENTER_WIN       13

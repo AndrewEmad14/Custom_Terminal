@@ -108,21 +108,21 @@ using namespace std;
 int  TerminalModifier::readKey() {
     int ch = _getch();
 
-    if (ch == EXTENDED) {
+    if (ch == EXTENDED_WIN) {
 
         int ext = _getch();
         switch (ext) {
-            case KEY_UP: return KEY_UP_CODE;
-            case KEY_DOWN: return KEY_DOWN_CODE;
-            case KEY_LEFT: return KEY_LEFT_CODE;
-            case KEY_RIGHT: return KEY_RIGHT_CODE;
+            case KEY_UP_WIN : return KEY_UP_CODE;
+            case KEY_DOWN_WIN : return KEY_DOWN_CODE;
+            case KEY_LEFT_WIN : return KEY_LEFT_CODE;
+            case KEY_RIGHT_WIN : return KEY_RIGHT_CODE;
 
         }
     }
 
-    if (ch == KEY_ESC) return KEY_ESC_CODE;
-    if (ch == KEY_ENTER) return KEY_ENTER_CODE;      // Enter
-    if (ch == KEY_BACKSPACE || ch == KEY_BACKSPACE_ALT) return KEY_BACKSPACE_CODE;
+    if (ch == KEY_ESC_WIN ) return KEY_ESC_CODE;
+    if (ch == KEY_ENTER_WIN ) return KEY_ENTER_CODE;      // Enter
+    if (ch == KEY_BACKSPACE_WIN  || ch == KEY_BACKSPACE_ALT_WIN ) return KEY_BACKSPACE_CODE;
 
 
 }
