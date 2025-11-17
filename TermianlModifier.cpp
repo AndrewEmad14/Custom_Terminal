@@ -11,7 +11,11 @@ using namespace std;
         #endif
 
     }
+    #ifdef _WIN32
+    #else
     termios TerminalModifier::orig_termios;
+    #endif // _WIN32
+
     void TerminalModifier:: enableAnsiSupport() {
         #ifdef _WIN32
             HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -21,12 +25,7 @@ using namespace std;
             SetConsoleMode(hOut, dwMode);
         #endif
     }
-    void TerminalModifier::getTerminalSize(int& width, int& height) {
-        struct winsize w;
-        ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-        width = w.ws_col;
-        height = w.ws_row;
-    }
+
     void TerminalModifier:: terminalSleep(int numberOfSeconds){
         this_thread::sleep_for(chrono::seconds(numberOfSeconds));
     }
@@ -70,7 +69,20 @@ using namespace std;
     }
 
     // Helper: read one char with optional timeout (in milliseconds)
+    void TerminalModifier::getTerminalSize(int& width, int& height) {
+        #ifdef _WIN32
+          CONSOLE_SCREEN_BUFFER_INFO csbi;
+        GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+        width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+        height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+        #else
+        struct winsize w;
+        ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+        width = w.ws_col;
+        height = w.ws_row;
+        #endif // _WIN32
 
+    }
  int TerminalModifier:: readWithTimeout(char* c, int timeout_ms) {
      #ifdef _WIN32
 
