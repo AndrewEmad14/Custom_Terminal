@@ -14,11 +14,30 @@ int main(void) {
 
 
     int magicBox=DEFAULT_VAL;
-    cin>>magicBox;
+    string currentColor= DEFAULT_STRING_VAL;
+    currentColor=myTerm.getRandColor();
+    int exit=DEFAULT_VAL;
+    while(!exit){
+          myTerm.displayText(YELLOW_COLOR,"Please choose an odd number:",0,0);
+          cin>>magicBox;
+          if(magicBox%2==0){
+                myTerm.displayText(MAGENTA_COLOR,"this isnt an odd number, please choose an odd one",0,0);
+                myTerm.terminalSleep(1);
+                myTerm.clearScreen();
+          }else{
+              exit=1;
+          }
+
+
+
+    }
+
+
     int num = STARTNUM;
     int row = STARTROW;                  // Start at top row
     int col = magicBox / 2;              // Middle column
-    string currentColor = DEFAULT_STRING_VAL;
+
+
 
     while (num <= magicBox * magicBox) {
 
