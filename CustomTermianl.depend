@@ -19,13 +19,14 @@
 	<conio.h>
 	<ncurses.h>
 
-1763386254 source:/home/andrew-emad/Documents/CustomTermianl/main.cpp
+1763470005 source:/home/andrew-emad/Documents/CustomTermianl/main.cpp
 	<iostream>
 	"TerminalModifier.h"
 
-1763386171 /home/andrew-emad/Documents/CustomTermianl/TerminalModifier.h
+1763469692 /home/andrew-emad/Documents/CustomTermianl/TerminalModifier.h
 	<string>
 	<iostream>
+	<cstdlib>
 	<windows.h>
 	<conio.h>
 	<termios.h>
@@ -34,7 +35,7 @@
 	<sys/select.h>
 	<errno.h>
 
-1763386022 source:/home/andrew-emad/Documents/CustomTermianl/TermianlModifier.cpp
+1763469329 source:/home/andrew-emad/Documents/CustomTermianl/TermianlModifier.cpp
 	"TerminalModifier.h"
 	<thread>
 	<chrono>

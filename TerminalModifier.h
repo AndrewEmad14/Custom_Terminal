@@ -4,7 +4,7 @@
                                                             //text style and color
 #include <string>
 #include <iostream>
-
+#include <cstdlib>
 #ifdef _WIN32
     #include <windows.h>
     #include <conio.h>
@@ -74,10 +74,10 @@ class TerminalModifier{
 
 
         void enableAnsiSupport(void);
-        void gotoxy(int x, int y);
+
         void paintText(string color,string text);
         int readWithTimeout(char* c, int timeout_ms);
-
+         void gotoxy(int x, int y);
         public:
         #ifdef _WIN32
         #else
@@ -90,7 +90,9 @@ class TerminalModifier{
         void enableRawMode(void);
         void disableRawMode(void);
         int readKey();
+
         void getTerminalSize(int& width, int& height);
+        string getRandColor();
 
 
 };

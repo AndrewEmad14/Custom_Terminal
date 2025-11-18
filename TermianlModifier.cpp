@@ -3,6 +3,7 @@
 #include <chrono>
 #include <iostream>
 
+
 using namespace std;
 
     TerminalModifier::TerminalModifier(){
@@ -44,8 +45,25 @@ using namespace std;
     void TerminalModifier::  paintText(string color,string text){
             cout<<color<<text<<RESET_COLOR<<std::flush;
     }
+    string TerminalModifier:: getRandColor(){
+        int randomNumber=rand()%7;
 
 
+                switch (randomNumber) {
+                    case 0: return BLACK_COLOR;
+                    case 1: return RED_COLOR;
+                    case 2: return GREEN_COLOR;
+                    case 3: return YELLOW_COLOR;
+                    case 4: return BLUE_COLOR;
+                    case 5: return MAGENTA_COLOR;
+                    case 6: return CYAN_COLOR;
+                    case 7: return RESET_COLOR;
+                    default: return "";  // no color
+                }
+
+
+
+    }
                                                                                         //to be classed
     void TerminalModifier:: enableRawMode() {
         #ifdef _WIN32
