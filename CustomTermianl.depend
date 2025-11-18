@@ -19,9 +19,9 @@
 	<conio.h>
 	<ncurses.h>
 
-1763470005 source:/home/andrew-emad/Documents/CustomTermianl/main.cpp
+1763505184 source:/home/andrew-emad/Documents/CustomTermianl/main.cpp
 	<iostream>
-	"TerminalModifier.h"
+	"CustomString.h"
 
 1763469692 /home/andrew-emad/Documents/CustomTermianl/TerminalModifier.h
 	<string>
@@ -42,4 +42,10 @@
 	<iostream>
 
 1763348228 source:/home/andrew-emad/Documents/CustomTermianl/TerminalKeyBoard.cpp
+
+1763505127 source:/home/andrew-emad/Documents/CustomTermianl/CustomString.cpp
+	"CustomString.h"
+	<iostream>
+
+1763505127 /home/andrew-emad/Documents/CustomTermianl/CustomString.h
 
