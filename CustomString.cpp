@@ -18,6 +18,11 @@ int str_length(char arr[]){
 
 int str_compare(char str1[],char str2[]){
     int sumStr1=DEFAULT_VAL,sumStr2=DEFAULT_VAL;
+    int size1=str_length(str1),size2=str_length(str2);
+    if(size1<size2)
+        return 1;
+    else if (size1>size2)
+        return -1;
     while(*(str1)||*(str2)){
         if(*(str1)){
             str1++;
