@@ -19,9 +19,8 @@
 	<conio.h>
 	<ncurses.h>
 
-1763569089 source:/home/andrew-emad/Documents/CustomTermianl/main.cpp
+1763571108 source:/home/andrew-emad/Documents/CustomTermianl/main.cpp
 	<iostream>
-	"TerminalModifier.h"
 
 1763569320 /home/andrew-emad/Documents/CustomTermianl/TerminalModifier.h
 	<string>
