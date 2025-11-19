@@ -53,7 +53,6 @@ using namespace std;
 #define KEY_BACKSPACE_CODE 1006
 
                                                     // ANSI color macros
-#define BLACK_COLOR   "\033[30m"
 #define RED_COLOR     "\033[31m"
 #define GREEN_COLOR   "\033[32m"
 #define YELLOW_COLOR  "\033[33m"
