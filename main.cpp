@@ -20,7 +20,11 @@ int main(void) {
     while(!exit){
           myTerm.displayText(YELLOW_COLOR,"Please choose an odd number:",0,0);
           cin>>magicBox;
-          if(magicBox%2==0){
+          if(magicBox<0){
+                myTerm.displayText(MAGENTA_COLOR,"please choose a postive number",0,0);
+                myTerm.terminalSleep(1);
+                myTerm.clearScreen();
+          }else if(magicBox%2==0){
                 myTerm.displayText(MAGENTA_COLOR,"this isnt an odd number, please choose an odd one",0,0);
                 myTerm.terminalSleep(1);
                 myTerm.clearScreen();
