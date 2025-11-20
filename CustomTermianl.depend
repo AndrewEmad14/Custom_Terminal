@@ -22,7 +22,7 @@
 1763571108 source:/home/andrew-emad/Documents/CustomTermianl/main.cpp
 	<iostream>
 
-1763569320 /home/andrew-emad/Documents/CustomTermianl/TerminalModifier.h
+1763573665 /home/andrew-emad/Documents/CustomTermianl/TerminalModifier.h
 	<string>
 	<iostream>
 	<cstdlib>
@@ -34,7 +34,7 @@
 	<sys/select.h>
 	<errno.h>
 
-1763569320 source:/home/andrew-emad/Documents/CustomTermianl/TermianlModifier.cpp
+1763573665 source:/home/andrew-emad/Documents/CustomTermianl/TermianlModifier.cpp
 	"TerminalModifier.h"
 	<thread>
 	<chrono>

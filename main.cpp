@@ -1,30 +1,25 @@
 #include <iostream>
 
 using namespace std;
-void swapUsingPlus(int *x,int *y){
+void displayOne(int arr[][5],int rows){
+     for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
 
-    *x=*x+*y;
-    *y=*x-*y;
-    *x=*x-*y;
-}
-void swapUsingMultiply(int *x,int *y){
-
-        *x=(*x)*(*y);
-        *y=(*x)/ (*y);
-        *x=(*x)/ (*y);
 
 }
-void swapUsingXOR(int *x,int *y){
-        *x=(*x)^(*y);
-        *y=(*x)^(*y);
-        *x=(*x)^(*y);
-}
+void displayTwo(int *arr,int row,int col){
+    for(int i=0;i<row*col;i++){
+        cout<<*arr<<endl;
+    }
 
+}
 int main(void) {
-    int x=10,y=5;
-    swapUsingPlus(&x,&y);
-    swapUsingXOR(&x,&y);
-    swapUsingXOR(&x,&y);
-    cout<<"X: "<<x<<" Y: "<<y<<endl;
+    int x[5][5]={0};
+   // displayOne(x,5);
+    displayTwo(&x[0][0],5,5);
     return 0;
 }
