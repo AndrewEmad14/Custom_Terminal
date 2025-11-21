@@ -4,7 +4,8 @@
                                                             //text style and color
 #include <string>
 #include <iostream>
-
+#include <thread>
+#include <chrono>
 #ifdef _WIN32
     #include <windows.h>
     #include <conio.h>
@@ -13,7 +14,7 @@
     #include <sys/ioctl.h>
     #include <unistd.h>
     #include <sys/select.h>
-    #include <errno.h>
+
 #endif
 
 using namespace std;

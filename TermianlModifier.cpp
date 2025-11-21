@@ -1,6 +1,5 @@
 #include "TerminalModifier.h"
-#include <thread>
-#include <chrono>
+
 #include <iostream>
 
 using namespace std;
@@ -87,19 +86,19 @@ using namespace std;
      #ifdef _WIN32
 
     #else
-          fd_set readfds;
-        FD_ZERO(&readfds);
-        FD_SET(STDIN_FILENO, &readfds);
+        fd_set readfds;                                           // Declare a file descriptor set for monitoring input
+        FD_ZERO(&readfds);                                        // Clear (zero out) the descriptor set
+        FD_SET(STDIN_FILENO, &readfds);                           // Add standard input (keyboard) to the set to watch
 
-        struct timeval timeout;
-        timeout.tv_sec = timeout_ms / 1000;
-        timeout.tv_usec = (timeout_ms % 1000) * 1000;
+        struct timeval timeout;                                   // Define a timeout structure for select()
+        timeout.tv_sec = timeout_ms / 1000;                       // Convert milliseconds to seconds
+        timeout.tv_usec = (timeout_ms % 1000) * 1000;             // Convert remaining milliseconds to microseconds
 
-        int ready = select(STDIN_FILENO + 1, &readfds, nullptr, nullptr, &timeout);
-        if (ready > 0) {
-            return read(STDIN_FILENO, c, 1);
+        int ready = select(STDIN_FILENO + 1, &readfds, nullptr, nullptr, &timeout); // Wait up to timeout for input on stdin
+        if (ready > 0) {                                          // If data is ready (and no error)
+            return read(STDIN_FILENO, c, 1);                      // Read one byte from stdin
         }
-        return 0; // timeout or error
+        return 0;                                                 // Return 0 on timeout or error (e.g., EINTR, EBADF)
     #endif
 }
 
