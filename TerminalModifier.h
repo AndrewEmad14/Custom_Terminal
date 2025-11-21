@@ -4,16 +4,17 @@
                                                             //text style and color
 #include <string>
 #include <iostream>
+#include <thread>
+#include <chrono>
 #include <cstdlib>
 #ifdef _WIN32
     #include <windows.h>
     #include <conio.h>
 #else
-    #include <termios.h>
-    #include <sys/ioctl.h>
-    #include <unistd.h>
-    #include <sys/select.h>
-    #include <errno.h>
+    #include <termios.h>                    //provides the terminal object to switch between canonical and raw
+    #include <sys/ioctl.h>                  //get the terminal dimensions
+    #include <unistd.h>                      //access to file descriptors (e.g., STDIN_FILENO)
+
 #endif
 
 using namespace std;

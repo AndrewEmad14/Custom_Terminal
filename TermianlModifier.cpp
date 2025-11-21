@@ -1,7 +1,6 @@
 #include "TerminalModifier.h"
-#include <thread>
-#include <chrono>
-#include <iostream>
+
+
 
 
 using namespace std;
@@ -19,11 +18,11 @@ using namespace std;
 
     void TerminalModifier:: enableAnsiSupport() {
         #ifdef _WIN32
-            HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-            DWORD dwMode = 0;
-            GetConsoleMode(hOut, &dwMode);
-            dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-            SetConsoleMode(hOut, dwMode);
+            HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);          // Get a handle to the standard output console buffer
+            DWORD dwMode = 0;                                       // Variable to store the current console mode flags
+            GetConsoleMode(hOut, &dwMode);                          // Retrieve the current console mode (e.g., input/output behavior settings)
+            dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;           // Enable virtual terminal processing to interpret ANSI escape sequences (e.g., \033[31m for red text)
+            SetConsoleMode(hOut, dwMode);                           // Apply the updated console mode back to the output buffer
         #endif
     }
 
@@ -85,10 +84,9 @@ using namespace std;
         #endif // _WIN32
     }
 
-    // Helper: read one char with optional timeout (in milliseconds)
     void TerminalModifier::getTerminalSize(int& width, int& height) {
         #ifdef _WIN32
-          CONSOLE_SCREEN_BUFFER_INFO csbi;
+        CONSOLE_SCREEN_BUFFER_INFO csbi;
         GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
         width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
         height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
@@ -97,14 +95,14 @@ using namespace std;
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         width = w.ws_col;
         height = w.ws_row;
-        #endif // _WIN32
+        #endif
 
     }
  int TerminalModifier:: readWithTimeout(char* c, int timeout_ms) {
      #ifdef _WIN32
 
     #else
-          fd_set readfds;
+        fd_set readfds;
         FD_ZERO(&readfds);
         FD_SET(STDIN_FILENO, &readfds);
 
