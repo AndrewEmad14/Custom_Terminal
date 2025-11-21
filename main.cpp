@@ -107,17 +107,25 @@ void displayCurrentEmployees(TerminalModifier& myTerm,Keyboard& myKeyboard,Emplo
 }
 int main(void) {
     TerminalModifier myTerm;
+
     Keyboard myKeyboard;
+
     Employee employeeTable[100];
+
     int currentEmployee=0;
+
     myKeyboard.enableRawMode();
+
     int terminalWidth=DEFAULT_VAL,terminalHeight=DEFAULT_VAL;
+
     myTerm.getTerminalSize(terminalWidth,terminalHeight);
     int menuWidth = MENU_WIDTH;
     int startX = (terminalWidth - menuWidth) / 2;
     int startY = terminalHeight / 2 - 3;  // Center vertically (menu is 7 lines tall)
+
     int currentBtn = 0;
     bool exit =false,insidePage=false;
+
     string buttons[NUMBER_OF_BUTTONS];
     setBtnColor(currentBtn,buttons);
 
@@ -125,7 +133,7 @@ int main(void) {
 
     while (!exit) {
 
-                  int key=myKeyboard.readKey() ;                                                 // First button
+                  int key=myKeyboard.readKey() ;
                  switch (key) {
                         case KEY_UP_CODE:
                             currentBtn--;

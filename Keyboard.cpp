@@ -30,25 +30,40 @@
      #ifdef _WIN32
 
     #else
-          fd_set readfds;
-        FD_ZERO(&readfds);
-        FD_SET(STDIN_FILENO, &readfds);
+            // Declare a file descriptor set to monitor input readiness
+            fd_set readfds;
+            // Clear the set to ensure it starts empty (required before use)
+            FD_ZERO(&readfds);
+            // Add standard input (keyboard) to the set so we can check if a key was pressed
+            FD_SET(STDIN_FILENO, &readfds);
 
-        struct timeval timeout;
-        timeout.tv_sec = timeout_ms / 1000;
-        timeout.tv_usec = (timeout_ms % 1000) * 1000;
+            // Prepare a timeout value for the select() call
+            struct timeval timeout;
+            // Convert timeout from milliseconds to seconds (e.g., 1500 ms → 1 sec)
+            timeout.tv_sec = timeout_ms / 1000;
+            // Convert the remaining milliseconds to microseconds (e.g., 500 ms → 500,000 µs)
+            timeout.tv_usec = (timeout_ms % 1000) * 1000;
 
-        int ready = select(STDIN_FILENO + 1, &readfds, nullptr, nullptr, &timeout);
-        if (ready > 0) {
-            return read(STDIN_FILENO, c, 1);
-        }
-        return 0; // timeout or error
+            // Wait up to 'timeout' for data to become available on stdin (or any fd in readfds)
+            // STDIN_FILENO + 1 = 1 (select() needs the highest fd + 1)
+            // We only care about reading (not writing or errors), so other fd sets are nullptr
+            // Returns: >0 if data is ready, 0 on timeout, -1 on error
+            int ready = select(STDIN_FILENO + 1, &readfds, nullptr, nullptr, &timeout);
+
+            // If data is ready (user pressed a key), read one byte from stdin
+            if (ready > 0) {
+                // Read a single byte into buffer 'c' (caller must ensure c points to valid memory)
+                // In raw mode, this captures one part of a keypress (e.g., 'A', or ESC for special keys)
+                return read(STDIN_FILENO, c, 1);
+            }
+            // If timeout occurred or an error happened, return 0 to indicate "no key pressed"
+            return 0; // timeout or error
     #endif
 }
 
 #ifdef _WIN32
 
-int  TerminalModifier::readKey() {
+int  Keyboard::readKey() {
     int ch = _getch();
 
     if (ch == EXTENDED_WIN) {

@@ -29,7 +29,7 @@ bool setEmployee(Employee* newEmployee){
     cout<<"Year: ";
     cin>>newEmployee->bod.year;
     cout<<endl;
-    if(isValidDate(newEmployee->bod.day,newEmployee->bod.month,newEmployee->bod.year)){
+    if(!isValidDate(newEmployee->bod.day,newEmployee->bod.month,newEmployee->bod.year)){
             cout<<"Enter a valid Date"<<endl;
         return false;
     }
@@ -39,7 +39,7 @@ bool setEmployee(Employee* newEmployee){
 bool displayEmployees(Employee e[] ,int sizeEmployee ){
 
     for(int i=0;i<sizeEmployee;i++){
-        cout << "Employee Number:\n";
+        cout << "Employee Number:"<<i+1<<endl;
         cout << "Name: " << e[i].firstName << " " << e[i].lastName << endl;
         cout << "Date of Birth: " << e[i].bod.day << "/" << e[i].bod.month << "/" << e[i].bod.year << endl;
         cout<<"========================================================================"<<endl;
