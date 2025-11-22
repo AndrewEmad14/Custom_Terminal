@@ -2,6 +2,9 @@
                                                             //[ starts control sequence
                                                             //h is cursor postion
                                                             //text style and color
+
+#ifndef TERMINAL_MODIFIER_H
+#define TERMINAL_MODIFIER_H
 #include <string>
 #include <iostream>
 
@@ -17,8 +20,6 @@
 #endif
 
 using namespace std;
-#ifndef TERMINAL_MODIFIER_H
-#define TERMINAL_MODIFIER_H
 
 
                                                     // ANSI color macros

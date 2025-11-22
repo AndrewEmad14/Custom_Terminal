@@ -15,11 +15,11 @@ using namespace std;
 
     void TerminalModifier:: enableAnsiSupport() {
         #ifdef _WIN32
-            HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-            DWORD dwMode = 0;
-            GetConsoleMode(hOut, &dwMode);
-            dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-            SetConsoleMode(hOut, dwMode);
+        HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);                    // Get handle to the console's standard output buffer
+        DWORD dwMode = 0;                                                 // Declare variable to hold current console mode flags
+        GetConsoleMode(hOut, &dwMode);                                    // Retrieve current console output mode settings
+        dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;                     // Enable support for ANSI/VT100 escape sequences (e.g., colored text)
+        SetConsoleMode(hOut, dwMode);                                     // Apply the updated mode to the console output buffer
         #endif
     }
 
@@ -36,7 +36,7 @@ using namespace std;
 
     }
     void TerminalModifier::  clearScreen(){
-            cout<<CLEAR_SCREEN;
+            cout<<CLEAR_SCREEN<<flush;
     }
     void TerminalModifier::  paintText(string color,string text){
             cout<<color<<text<<RESET_COLOR<<std::flush;

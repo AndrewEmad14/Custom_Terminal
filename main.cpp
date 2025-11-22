@@ -1,7 +1,7 @@
 #include <iostream>
 #include "TerminalModifier.h"
 #include "Keyboard.h"
-#include "Employee.h"
+#include "ViEditor.h"
 #define DEFAULT_VAL 0
 #define MENU_WIDTH 18
 #define NUMBER_OF_BUTTONS 3
@@ -9,8 +9,9 @@ using namespace std;
 
 void setBtnColor(int &current,string buttons[]);
 void  printMenu(string firstBtn,string secondBtn,string thridBtn,int startX,int startY);
-void generateEmployee(TerminalModifier& myTerm);
-
+void  enterInsertMode(ViEditor & myViEditor,Keyboard & myKeyboard);
+bool displayOutput(ViEditor & myViEditor);
+void enterCommandMode(ViEditor & myViEditor);
 void printMenu(TerminalModifier& myTerm,string firstBtn,string secondBtn,string thridBtn,int startX,int startY){
                 myTerm.displayText(firstBtn, "+----------------+", startX, startY);
                 myTerm.displayText(firstBtn, "|      New       |", startX, startY + 1);
@@ -40,68 +41,26 @@ void setBtnColor(int &current,string buttons[]){
         buttons[i]=RESET_COLOR;
     }
 }
+void  enterInsertMode(ViEditor & myViEditor,Keyboard & myKeyboard,TerminalModifier &myTerm){
+    myKeyboard.disableRawMode();
+    char* sentence = myViEditor.takeInput(myTerm,myKeyboard);
+    //do you wish to save
 
-void generateEmployee(TerminalModifier& myTerm,Keyboard& myKeyboard,Employee e[],int* current){
-    while(true){
-        myTerm.terminalSleep(1);
-        int key=myKeyboard.readKey();
-        switch(key){
-                case KEY_ENTER_CODE:
-                    myTerm.clearScreen();
-                    cout << flush;
-                    myKeyboard.disableRawMode();
-                    myTerm.gotoxy(0,0);
-                    if(setEmployee(&e[*current])){
-                        (*current)++;
-                        cout<<"YOU NOW HAVE "<<*current<<" EMPLOYEES"<<endl;
+    myViEditor.saveToFile(sentence);
 
-                    }
-                     myTerm.terminalSleep(1);
-                    myKeyboard.enableRawMode();
-
-                    break;
-                case KEY_BACKSPACE_CODE:
-                case KEY_ESC_CODE:
-                    myTerm.clearScreen();
-                    cout << flush;
-                    return;
-        }
-        myTerm.clearScreen();
-        cout << flush;
-        myTerm.displayText(BLUE_COLOR,"Current Employee   "+ to_string(*current),0,0);
-        myTerm.displayText(BLUE_COLOR,"Press Enter to create a new employee",0,4);
-        myTerm.displayText(RED_COLOR,"Press ESC to exit ",0,8);
-
-    }
-
+    return;
+    //enter if you want to continue appending text esc if you want to exit
 
 
 }
-void displayCurrentEmployees(TerminalModifier& myTerm,Keyboard& myKeyboard,Employee e[],int* current){
+void enterCommandMode(Keyboard & myKeyboard){
+     myKeyboard.enableRawMode();
+}
 
-     myTerm.clearScreen();
-     cout << flush;
-     myTerm.displayText(BLUE_COLOR,"List of Employees",0,0);
-     myTerm.displayText(BLUE_COLOR,"Number of Employees: "+to_string(*current),0,5);
-     cout<<endl;
-     cout<<endl;
-     displayEmployees(e,*current);
-     cout << "\nPress ESC or BACKSPACE key to return to menu..."<<endl;
-     while(true){
-         int key = myKeyboard.readKey();
-         switch(key){
-            case KEY_BACKSPACE_CODE:
-            case KEY_ESC_CODE:
-                        myTerm.clearScreen();
-                        cout << flush;
-                        return;
-            default:
-                        ;
-         }
-
-
-     }
-
+bool displayOutput(ViEditor & myViEditor){
+    myViEditor.displayFile();
+    //press enter to continue
+    return true;
 
 
 }
@@ -110,9 +69,7 @@ int main(void) {
 
     Keyboard myKeyboard;
 
-    Employee employeeTable[100];
-
-    int currentEmployee=0;
+    ViEditor myViEditor;
 
     myKeyboard.enableRawMode();
 
@@ -167,12 +124,21 @@ int main(void) {
                         case KEY_ENTER_CODE:
                                     if(currentBtn==0){
                                         insidePage=true;
-                                        generateEmployee(myTerm,myKeyboard,employeeTable,&currentEmployee);
-                                        printMenu(myTerm, buttons[0], buttons[1],buttons[2],startX,startY);
+                                        myTerm.clearScreen();
+
+                                        enterInsertMode(myViEditor,myKeyboard,myTerm);
+                                        myKeyboard.enableRawMode();
+                                        myTerm.clearScreen();
+
+                                    printMenu(myTerm, buttons[0], buttons[1],buttons[2],startX,startY);
 
                                     }else if(currentBtn==1) {
-                                         insidePage=true;
-                                         displayCurrentEmployees(myTerm,myKeyboard,employeeTable,&currentEmployee);
+                                        myTerm.clearScreen();
+                                        insidePage=true;
+                                        myKeyboard.disableRawMode();
+                                        displayOutput(myViEditor);
+                                        myKeyboard.enableRawMode();
+
 
 
 
@@ -182,13 +148,18 @@ int main(void) {
                                     }
 
 
+
+
+                            break;
                         case KEY_BACKSPACE_CODE:
                             if(insidePage){
+                                myTerm.clearScreen();
                                 setBtnColor(currentBtn,buttons);
                                 printMenu(myTerm, buttons[0], buttons[1],buttons[2],startX,startY);
                             }
                         default:
                             ;
+
 
 
                     }

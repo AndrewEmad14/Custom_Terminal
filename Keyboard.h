@@ -28,11 +28,11 @@
     #include <conio.h>
 #else
     #include <termios.h>
-    #include <sys/ioctl.h>
-    #include <unistd.h>
-    #include <sys/select.h>
-    #include <errno.h>
-#endif                                               //unified key codes
+    #include <sys/ioctl.h>// Provides the ioctl() function for device-specific input/output operations (e.g., terminal control, window size)
+    #include <unistd.h> // Declares standard POSIX system calls like read(), write(), close(), and access to file descriptors (e.g., STDIN_FILENO)
+    #include <sys/select.h> // Enables the select() system call for monitoring multiple file descriptors for I/O readiness (useful for non-blocking I/O)
+#endif
+                                                //unified key codes
 
 
 #define KEY_UP_CODE      1000

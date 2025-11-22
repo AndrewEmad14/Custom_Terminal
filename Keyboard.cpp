@@ -7,7 +7,7 @@
         #ifdef _WIN32
 
         #else
-         tcgetattr(STDIN_FILENO, &orig_termios);
+            tcgetattr(STDIN_FILENO, &orig_termios);
             termios raw = orig_termios;
             raw.c_lflag &= ~(ICANON | ECHO); // Disable canonical mode & echo
             raw.c_cc[VMIN] = 0;  // Minimum number of characters to read
@@ -24,7 +24,7 @@
         #endif // _WIN32
     }
 
-    // Helper: read one char with optional timeout (in milliseconds)
+                                                        // Helper: read one char with optional timeout (in milliseconds)
 
  int Keyboard:: readWithTimeout(char* c, int timeout_ms) {
      #ifdef _WIN32
@@ -88,7 +88,7 @@ int  Keyboard::readKey() {
 
   int Keyboard::readKey() {
     char c;
-    if (read(STDIN_FILENO, &c, 1) <= 0) return KEY_UNKNOWN;
+    if (read(STDIN_FILENO, &c, 1) <= 0) return KEY_UNKNOWN;                                         //read 1 byte
 
     if (c == KEY_ESC) {
         char second = 0, third = 0;
@@ -116,7 +116,7 @@ int  Keyboard::readKey() {
             case KEY_ENTER:
             case KEY_ENTER_ALT: return KEY_ENTER_CODE;
             case KEY_BACKSPACE: return KEY_BACKSPACE_CODE;
-            default:            return KEY_UNKNOWN;
+            default:            return int(c);
         }
     }
 }
